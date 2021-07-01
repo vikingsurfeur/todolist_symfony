@@ -27,7 +27,7 @@ class TodoListController extends AbstractController
         }
 
         return $this->render("todo_list/create.html.twig", [
-            "form" => $form->createView()
+            "form" => $form->createView(),
         ]);
     }
 
@@ -40,7 +40,25 @@ class TodoListController extends AbstractController
         $todoLists = $repository->findAll();
 
         return $this->render("/todo_list/index.html.twig", [
-            "todoLists" => $todoLists
+            "todoLists" => $todoLists,
+        ]);
+    }
+
+    /**
+     * @Route ("/update-list/{id}", name="update_list")
+     */
+    public function update(TodoList $list, Request $request): Response
+    {
+        $form = $this->createForm(TodoListType::class, $list);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render("todo_list/create.html.twig", [
+            "form" => $form->createView(),
+            "list" => $list,
         ]);
     }
 }
