@@ -24,6 +24,7 @@ class TodoListController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($todoList);
             $em->flush();
+            echo "<script>window.location.href='/'</script>";
         }
 
         return $this->render("todo_list/create.html.twig", [
@@ -54,6 +55,7 @@ class TodoListController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager()->flush();
+            echo "<script>window.location.href='/'</script>";
         }
 
         return $this->render("todo_list/create.html.twig", [
