@@ -14,7 +14,6 @@ class TodoListController extends AbstractController
     /**
      * @Route ("/create-list", name="create_list")
      */
-    
     public function create(Request $request): Response {
         $todoList = new TodoList();
 
@@ -29,6 +28,19 @@ class TodoListController extends AbstractController
 
         return $this->render("todo_list/create.html.twig", [
             "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route ("/", name="read_all")
+     */
+    public function readAll(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(TodoList::class);
+        $todoLists = $repository->findAll();
+
+        return $this->render("/todo_list/index.html.twig", [
+            "todoLists" => $todoLists
         ]);
     }
 }
