@@ -14,8 +14,18 @@ class TodoListType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("name", TextType::class, ["label" => "Nom de la list"])
-            ->add("color", ColorType::class, ["label" => "Couleur de la liste"]);
+            ->add("name", TextType::class, [
+                'label' => false,
+                "required" => true, "row_attr" => [
+                "class" => "p-2"
+                ],
+            ])
+            ->add("color", ColorType::class, [
+                "label" => false,
+                "required" => true, "row_attr" => [
+                "class" => "p-2 w-25"
+            ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
