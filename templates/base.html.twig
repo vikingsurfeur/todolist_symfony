@@ -15,6 +15,24 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <i class="far fa-check-circle fa-2x text-primary me-4"></i>
+                    <h1 class="h4 m-0">TodoList Symfony</h1>
+                </a>
+                <div id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active d-flex align-items-center" href="#">
+                                <i class="far fa-plus-square fa-2x text-primary me-3"></i>
+                                <h2 class="h5 m-0">Créer une TodoList</h2>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
     </body>
 </html>
