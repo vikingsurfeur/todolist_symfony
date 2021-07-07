@@ -97,7 +97,7 @@ class TodoList
     }
 
     /**
-     * @return Collection|Task[]
+     * @return Collection
      */
     public function getTasks(): Collection
     {
