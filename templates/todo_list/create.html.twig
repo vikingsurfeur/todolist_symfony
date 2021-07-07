@@ -1,22 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="container my-5">
-    {{ form_start(form) }}
-    {% if app.request.get("_route") == "create_list" %}
-    <h3 class="p-2">Créer une nouvelle liste</h3>
-    {% else %}
-    <h3 class="p-2">Modifier la liste : {{ list.name }}</h3>
-    {% endif %}
-    {{ form_label(form.name, "Nom de la liste", {"label_attr": {"class": "p-2"}}) }}
-    {{ form_row(form.name) }}
-    {{ form_label(form.name, "Choisir la Couleur", {"label_attr": {"class": "p-2 mt-5"}}) }}
-    {{ form_row(form.color) }}
-    {% if app.request.get("_route") == "create_list" %}
-    <input type="submit" value="Créer" class="btn btn-success mx-2 my-5" />
-    {% else %}
-    <input type="submit" value="Modifier" class="btn btn-warning mx-2 my-5" />
-    {% endif %}
-    {{ form_end(form) }}
-</div>
+    <div class="container my-5">
+        {{ form_start(form) }}
+        {% if app.request.get("_route") == "create_list" %}
+        <h3 class="p-2">Créer une nouvelle liste</h3>
+        {% else %}
+        <h3 class="p-2">Modifier la liste : {{ list.name }}</h3>
+        {% endif %}
+        {{ form_label(form.name, "Nom de la liste", {"label_attr": {"class": "p-2"}}) }}
+        {{ form_row(form.name) }}
+        {{ form_label(form.name, "Choisir la Couleur", {"label_attr": {"class": "p-2 mt-5"}}) }}
+        {{ form_row(form.color) }}
+        {% if app.request.get("_route") == "create_list" %}
+        <input type="submit" value="Créer" class="btn btn-success mx-2 my-5" />
+        {% else %}
+        <input type="submit" value="Modifier" class="btn btn-warning mx-2 my-5" />
+        {% endif %}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
