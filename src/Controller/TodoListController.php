@@ -13,6 +13,7 @@ class TodoListController extends AbstractController
 {
     /**
      * @Route ("/create-list", name="create_list")
+     * @param Request $request
      * @return Response
      */
     public function create(Request $request): Response {
@@ -49,6 +50,8 @@ class TodoListController extends AbstractController
 
     /**
      * @Route ("/update-list/{id}", name="update_list")
+     * @param TodoList $list
+     * @param Request $request
      * @return Response
      */
     public function update(TodoList $list, Request $request): Response
@@ -57,7 +60,7 @@ class TodoListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager()->flush();
             echo "<script>window.location.href='/'</script>";
         }
 
@@ -69,6 +72,7 @@ class TodoListController extends AbstractController
 
     /**
      * @Route ("/delete-list/{id}", name="delete_list")
+     * @param TodoList $list
      * @return Response
      */
     public function delete(TodoList $list): Response
