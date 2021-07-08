@@ -27,7 +27,7 @@ class TodoListController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($todoList);
             $em->flush();
-            echo "<script>window.location.href='/'</script>";
+            return $this->redirectToRoute("read_all");
         }
 
         return $this->render("todo_list/create.html.twig", [
@@ -62,7 +62,7 @@ class TodoListController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            echo "<script>window.location.href='/'</script>";
+            return $this->redirectToRoute("read_all");
         }
 
         return $this->render("todo_list/create.html.twig", [
@@ -78,15 +78,9 @@ class TodoListController extends AbstractController
      */
     public function delete(TodoList $list): Response
     {
-        $repository = $this->getDoctrine()->getRepository(TodoList::class);
-        $todoList = $repository->find($list);
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($list);
         $em->flush();
-
-        return $this->render("todo_list/delete.html.twig", [
-            "list" => $todoList,
-        ]);
+        return $this->redirectToRoute("read_all");
     }
 }
