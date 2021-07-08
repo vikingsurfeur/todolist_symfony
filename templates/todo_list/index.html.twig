@@ -7,7 +7,11 @@
                 <h5 class="card-header" style="background-color: {{ todoList.color }};"></h5>
                 <div class="card-body">
                     <h5 class="card-title">{{ todoList.name }}</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">
+                        {% for task in todoList.tasks %}
+                            <h6>{{ task.title }}</h6>
+                        {% endfor %}
+                    </p>
                     <div class="d-flex justify-content-between">
                         <a href="/update-list/{{ todoList.id }}" class="btn btn-warning">
                             <i class="fas fa-pen"></i>
