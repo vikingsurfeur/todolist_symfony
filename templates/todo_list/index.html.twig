@@ -11,9 +11,10 @@
                         {% for task in todoList.tasks %}
                         <div class="d-flex align-items-center">
                             <div class="my-3">
-                                <input class="me-3 p-2" type="checkbox" {{ task.completed ? 'checked' : '' }}>
+                                <input 
+                                    class="me-3 p-2" type="checkbox" {{ task.completed ? 'checked' : '' }}
+                                    onchange="window.location.href='/update-task-status/{{ task.id }}'" />
                                 <span class="h6 m-0">{{ task.title }}</span>
-                        
                             </div>
                             <div class="flex-grow-1 text-end">
                                 <a href="/update-task/{{ task.id }}" class="btn btn-warning btn-sm">

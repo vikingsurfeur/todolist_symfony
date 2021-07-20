@@ -59,4 +59,13 @@ class TaskController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("read_all");
     }
+
+    #[Route('/update-task-status/{id}', name: 'update_task_status')]
+    public function updateTaskStatus(Task $task): Response
+    {
+        $task->setCompleted(!$task->getCompleted());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        return $this->redirectToRoute("read_all");
+    }
 }
