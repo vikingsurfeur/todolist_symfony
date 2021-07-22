@@ -11,9 +11,13 @@
                         {% for task in todoList.tasks %}
                         <div class="d-flex align-items-center">
                             <div class="my-3">
-                                <input 
-                                    class="me-3 p-2" type="checkbox" {{ task.completed ? 'checked' : '' }}
-                                    onchange="window.location.href='/update-task-status/{{ task.id }}'" />
+                                <a href="/update-task-status/{{ task.id }}" class="js-status">
+                                    {% if task.completed %}
+                                        <i class="fas fa-check-square"></i>
+                                    {% else %}
+                                        <i class="fas fa-square"></i>
+                                    {% endif %}
+                                </a>
                                 <span class="h6 m-0">{{ task.title }}</span>
                             </div>
                             <div class="flex-grow-1 text-end">
@@ -42,4 +46,33 @@
             </div>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        window.addEventListener("load", event => {
+            document.querySelectorAll("a.js-status").forEach(link => {
+                link.addEventListener("click", updateStatus);
+            });
+        });
+
+        function updateStatus(event) {
+            event.preventDefault();
+
+            const checkIcon = this.querySelector("i.fas");
+
+            axios.post(this.href).then(response => {
+                if(checkIcon.classList.contains("fa-check-square")) {
+                    checkIcon.classList.replace("fa-check-square", "fa-square");
+                } else {
+                    checkIcon.classList.replace("fa-square", "fa-check-square");
+                }
+            }).catch(error => {
+                console.error(error);
+                window.alert("Une erreur est survenue");
+            });
+        }
+    </script>
 {% endblock %}
